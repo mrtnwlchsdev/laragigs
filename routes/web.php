@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\Request;
 use App\Models\Listing;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController;
+use Symfony\Component\HttpFoundation\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,18 @@ use App\Models\Listing;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/listings', function() {
-    return view('listings', [
-        'heading'   => 'Prueba Laravel',
-        'listings'  => Listing::all()
-    ]);
-});
 
-Route::get('/listings/{listing}', function(Listing $listing) {
-    return view('listing', [
-        'listing' => $listing
-    ]);
-});
+/*
+    Metodos de rutas comunes
+
+        - index - Mostrar todos los recursos
+        - show - Mostrar un recurso de forma individual
+        - create - Mostrar el formulario de creacion de nuevos recursos
+        - store - Guardar un nuevo recurso
+        - edit - Editar un recurso
+        - update - Actualizar un recurso
+        - destroy - Eliminar un recurso
+*/
+
+Route::get('/', [ListingController::class, 'index']);
+Route::get('/{listing}', [ListingController::class, 'show']);
